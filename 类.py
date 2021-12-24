@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 """
 类:类和类之间的关系有三种：is-a继承、has-a关联和use-a依赖关系
-
+pip 国内
+pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 """
 class people:
     # 定义基本属性

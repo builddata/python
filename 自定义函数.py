@@ -77,19 +77,20 @@ from time import sleep
 import time
 
 def decorator(func):
-    def wrapper(*args, **kwargs):
+    def wrapper(a, b):#wrapper(*args, **kwargs)
         start_time = time.time()
-        func()
+        func(a,b)
         end_time = time.time()
         print(end_time - start_time)
-
     return wrapper
 
 @decorator  #@decorator这个语法相当于 执行 func = decorator(func)，func 就被赋值为wrapper
-def func(): #，虽然我们在程序显式调用的是 func() 函数，但其实执行的是装饰器嵌套的 wrapper() 函数
+def func(a,b): #，虽然我们在程序显式调用的是 func() 函数，但其实执行的是装饰器嵌套的 wrapper() 函数
     time.sleep(0.8)
+    v=a*b
+    print (v)
 
-func() # 函数调用
+func(5,4) # 函数调用
 # 输出：0.800644397735595
 #---------------------------------------------------------------------------------------
 #让 一个类发挥装饰器的作用

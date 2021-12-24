@@ -9,9 +9,7 @@ import numpoy as np
 import os
 dir_name = './'
 os.listdir(dir_name) #获取目录下文件名
-pd.set_option('display.max_rows', 1000)
-pd.set_option('display.width', 1000)
-pd.set_option('display.max_columns', 1000)
+
 
 # 通过enumerate函数处理列表之后再遍历可以同时获得元素索引和值
 list1=['a','d','c']
@@ -47,7 +45,7 @@ print(mystr.count('and', 0, 20))#1
 
 import pickle
 data={'a':[1,2,3],'b':( 'string','abc')}                       #pickle
-Pic=open('testdata.pkl','wb')
+Pic=open(r'c:\python\testdata.pkl','wb')
 pickle.dump(data,Pic)
 Pic.close()
 Pic=open(r'c:\python\testdata.pkl','rb')
@@ -65,11 +63,11 @@ m2 = map(lambda x, y: x + y, [1, 3, 5, 7, 9], [2, 4, 6, 8, 10])
 print(list(m2))  # [3, 7, 11, 15, 19]
 
 d= {'a': 1, 'c': 3, 'b': 2} 
-d_order = sorted(d.items(), key=lambda x: x[1], reverse=False)  # sorted按照值排序
+d_order = sorted(d.items(), key=lambda x: x[1], reverse=False)  # sorted按照值排序x[0]
 print(d_order)   #[('a', 1), ('b', 2), ('c', 3)]
 
 arr=pd.Series([3,2,1,4,5])
-arr.where(arr > 1, 10)
+arr.where(arr > 1, 10,inplace=True)
 print (arr)# [3,2,10,4,5]
 data[(np.abs(data)>3).any(1)]  #选出含有“超过3或-3的”行
 
@@ -100,8 +98,18 @@ s1 = {10, 20}
 s1.add(100) #update()
 s1.remove(10) #s1.discard(10)不会报错
 
+
+x = 3
+eval( '5 * x + 9' )  #24
+
+from functools import reduce
+ #reduce() 函数会对根据传入的函数，对参数序列中元素进行累积操作。 即：用传给 reduce 中的函数 
+ #function（有两个参数）先对集合中的第 1、2 个元素进行操作，得到的结果再与第三个数据用 function 函数运算，最后得到一个结果。
+# 使用 lambda 匿名函数计算累乘
+reduce(lambda x, y: x*y, [1,2,3,4,5]) #120
+
 df.PB.rolling(1000).quantile(0.25)#   median()
 
-
+#利用 * 号操作符，可以将元组解压为列表
 
 
