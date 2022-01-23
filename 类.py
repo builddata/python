@@ -60,6 +60,28 @@ def main():
 
 if __name__ == '__main__':
     main()
+    
+#----------------------------------
+#但是如果外部代码要获取name和score怎么办？可以给Student类增加get_name和get_score这样的方法：    
+
+class Student(object):
+    def __init__(self, name, score):
+        self.__name = name
+        self.__score = score
+    def get_name(self):
+        return self.__name
+
+    @property
+    def score(self):
+        return self._score
+
+    @score.setter
+    def score(self, value):
+        if not isinstance(value, int):
+            raise ValueError('score must be an integer!')
+        if value < 0 or value > 100:
+            raise ValueError('score must between 0 ~ 100!')
+        self._score = value
 #----------------------------------------------------------------------------------------
 #当我们调用这个经过子类重写的方法时，不同的子类对象会表现出不同的行为，这个就是多态（poly-morphism）
 from abc import ABCMeta, abstractmethod
@@ -182,9 +204,42 @@ class CLanguage:
 clangs = CLanguage()
 clangs("C语言中文网","http://c.biancheng.net")
 
+#--------------------------------------------------------
+#一个类想被用于for ... in循环
+#要表现得像list那样按照下标取出元素，需要实现__getitem__()方法：
+class Fib(object):
+    def __init__(self):
+        self.a, self.b = 0, 1 # 初始化两个计数器a，b
 
+    def __iter__(self):
+        return self # 实例本身就是迭代对象，故返回自己
 
+    def __next__(self):
+        self.a, self.b = self.b, self.a + self.b # 计算下一个值
+        if self.a > 100000: # 退出循环的条件
+            raise StopIteration()
+        return self.a # 返回下一个值
+    def __getitem__(self, n):
+        a, b = 1, 1
+        for x in range(n):
+            a, b = b, a + b
+        return a
+    
+for n in Fib():
+     print(n)
 
+#---------------------------------------------------------
+#正常情况下，我们都用class Xxx...来定义类，但是，type()函数也允许我们动态创建出类来
+def fn(self, name='world'): # 先定义函数
+     print('Hello, %s.' % name)
+
+>>> Hello = type('Hello', (object,), dict(hello=fn)) # 创建Hello class
+>>> h = Hello()
+>>> h.hello()
+Hello, world.
+#1.class的名称；
+#2.继承的父类集合，注意Python支持多重继承，如果只有一个父类，别忘了tuple的单元素写法；
+#3.class的方法名称与函数绑定，这里我们把函数fn绑定到方法名hello上。
 
 
 

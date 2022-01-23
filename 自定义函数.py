@@ -92,6 +92,21 @@ def func(a,b): #，虽然我们在程序显式调用的是 func() 函数，但�
 
 func(5,4) # 函数调用
 # 输出：0.800644397735595
+
+def log(text):
+    def decorator(func):
+        def wrapper(*args, **kw):
+            print('%s %s():' % (text, func.__name__))
+            return func(*args, **kw)
+        return wrapper
+    return decorator
+
+@log('execute')
+def now():
+    print('2015-3-25')
+>>> now()
+execute now():
+2015-3-25
 #---------------------------------------------------------------------------------------
 #让 一个类发挥装饰器的作用
 class logit(object):
